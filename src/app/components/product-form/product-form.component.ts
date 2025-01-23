@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common'; // Importar Location
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-form',
@@ -16,7 +16,7 @@ export class ProductFormComponent implements OnInit {
     private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location // Inyectar Location
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +29,6 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // Validaciones
     if (!this.product.name || this.product.name.length < 3) {
       alert('Please enter a valid name with at least 3 characters.');
       return;
@@ -45,7 +44,7 @@ export class ProductFormComponent implements OnInit {
       return;
     }
 
-    // Si la validación es exitosa, enviar el formulario
+
     if (this.productId) {
       this.productService
         .updateProduct(this.productId, this.product)
