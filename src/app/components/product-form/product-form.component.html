@@ -1,0 +1,77 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">{{ productId ? 'Edit Product' : 'Create Product' }}</h2>
+  <form (ngSubmit)="onSubmit()" #productForm="ngForm" class="p-4 border rounded shadow-sm">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="product.name"
+        name="name"
+        #name="ngModel"
+        required
+        minlength="3"
+      />
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+        <small *ngIf="name.errors?.['required']">Name is required.</small>
+        <small *ngIf="name.errors?.['minlength']">Name must be at least 3 characters long.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        class="form-control"
+        id="description"
+        [(ngModel)]="product.description"
+        name="description"
+        rows="4"
+      ></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input
+        type="number"
+        class="form-control"
+        id="price"
+        [(ngModel)]="product.price"
+        name="price"
+        #price="ngModel"
+        required
+        min="0.01"
+        step="0.01"
+      />
+      <div *ngIf="price.invalid && (price.dirty || price.touched)" class="text-danger">
+        <small *ngIf="price.errors?.['required']">Price is required.</small>
+        <small *ngIf="price.errors?.['min']">Price must be greater than 0.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input
+        type="number"
+        class="form-control"
+        id="quantity"
+        [(ngModel)]="product.quantity"
+        name="quantity"
+        #quantity="ngModel"
+        required
+        min="0"
+        step="1"
+        pattern="^[0-9]+$"
+      />
+      <div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)" class="text-danger">
+        <small *ngIf="quantity.errors?.['required']">Quantity is required.</small>
+        <small *ngIf="quantity.errors?.['pattern']">Quantity must be a whole number.</small>
+      </div>
+    </div>
+
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-primary btn-lg" [disabled]="productForm.invalid">Submit</button>
+      <button type="button" class="btn btn-secondary btn-lg mt-2" (click)="goBack()">Back</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center text-primary">Product List</h2>
+
+  <!-- Botón para crear un nuevo producto -->
+  <div class="mb-4">
+    <a routerLink="/add-product" class="btn btn-success btn-lg">
+      <i class="fas fa-plus-circle"></i>
+      <span class="ml-2">Create New Product</span>
+    </a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price | currency }}</td>
+          <td>{{ product.quantity }}</td>
+          <td class="text-center">
+            <button class="btn btn-warning btn-sm px-3 py-2 mr-4 rounded-pill shadow" [routerLink]="['/edit', product.id]">
+              <i class="fas fa-edit"></i>
+              <span class="d-none d-sm-inline ml-2">Edit</span>
+            </button>
+            <button class="btn btn-danger btn-sm px-3 py-2 ml-4 rounded-pill shadow" (click)="deleteProduct(product.id)">
+              <i class="fas fa-trash-alt"></i>
+              <span class="d-none d-sm-inline ml-2">Delete</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
